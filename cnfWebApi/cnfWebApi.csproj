@@ -208,6 +208,12 @@
     <Compile Include="Controllers\FoodGroupController.cs" />
     <Compile Include="Controllers\CSVController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NutrientGroupController.cs" />
+    <Compile Include="Controllers\NutrientNameController.cs" />
+    <Compile Include="Controllers\NutrientSourceController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
+    <Compile Include="Controllers\NutrientAmountController.cs" />
+    <Compile Include="Controllers\ServingSizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,14 +222,25 @@
     <Compile Include="Models\DataEntity.cs" />
     <Compile Include="Models\FoodGroup.cs" />
     <Compile Include="Models\IFoodGroupRepository.cs" />
+    <Compile Include="Models\INutrientGroupRepository.cs" />
+    <Compile Include="Models\INutrientNameRepository.cs" />
+    <Compile Include="Models\INutrientSourceRepository.cs" />
+    <Compile Include="Models\IFoodRepository.cs" />
+    <Compile Include="Models\INutrientAmountRepository.cs" />
+    <Compile Include="Models\IServingSizeRepository.cs" />
     <Compile Include="Models\NutrientGroup.cs" />
-    <Compile Include="Models\NutrName.cs" />
-    <Compile Include="Models\NutrSource.cs" />
-    <Compile Include="Models\ReportCfg.cs" />
-    <Compile Include="Models\WebFoodSearch.cs" />
-    <Compile Include="Models\WebNutrientList.cs" />
-    <Compile Include="Models\WebServingSize.cs" />
-    <Compile Include="Models\WebStatistics.cs" />
+    <Compile Include="Models\NutrientGroupController.cs" />
+    <Compile Include="Models\NutrientGroupRepository.cs" />
+    <Compile Include="Models\NutrientName.cs" />
+    <Compile Include="Models\NutrientNameRepository.cs" />
+    <Compile Include="Models\NutrientSource.cs" />
+    <Compile Include="Models\NutrientSourceRepository.cs" />
+    <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\FoodRepository.cs" />
+    <Compile Include="Models\NutrientAmount.cs" />
+    <Compile Include="Models\NutrientAmountRepository.cs" />
+    <Compile Include="Models\ServingSize.cs" />
+    <Compile Include="Models\ServingSizeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs\" />
+    <Folder Include="obj\Debug\" />
     <Folder Include="obj\Release\" />
   </ItemGroup>
   <ItemGroup>

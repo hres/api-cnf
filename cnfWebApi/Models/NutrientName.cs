@@ -1,7 +1,7 @@
 using System;
 namespace cnfWebApi.Models
 {
-    public class NutrName
+    public class NutrientName
     {
         public int nutr_c { get; set; }
         public string nutr_symbol { get; set; }

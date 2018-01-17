@@ -8,8 +8,8 @@ namespace cnfWebApi.Models
 {
     interface IFoodGroupRepository
     {
-        IEnumerable<FoodGroup> GetAll(string lang="", string ingredientname = "");
-        //ActiveIngredient Get(int id, string lang);
+        IEnumerable<FoodGroup> GetAll(string lang="");
+
         FoodGroup Get(int id, string lang = "");
     }
 }

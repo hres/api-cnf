@@ -13,11 +13,7 @@ namespace cnfWebApi
         public static readonly string UriPathExtensionKey = "ext";
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(
-               name: "ApiMultiParamPathExtension ID",
-               routeTemplate: "{controller}/{din}/{foodname}/{lang}.{ext}",
-               defaults: new { din = RouteParameter.Optional, brandname = RouteParameter.Optional, company = RouteParameter.Optional, active = RouteParameter.Optional, status = RouteParameter.Optional, lang = RouteParameter.Optional, ext = RouteParameter.Optional });
-
+            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",
