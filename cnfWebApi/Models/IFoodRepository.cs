@@ -6,6 +6,6 @@ namespace cnfWebApi.Models
     {
         IEnumerable<Food> GetAll(string lang="");
 
-        Food Get(int id, string lang = "");
+        IEnumerable<Food> Get(int id, string lang = "");
     }
 }

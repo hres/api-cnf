@@ -8,13 +8,14 @@ namespace cnfWebApi.Models
         private List<ServingSize> servingSizes = new List<ServingSize>();
         private ServingSize servingSize = new ServingSize();
         DBConnection dbConnection = new DBConnection("en");
-        public ServingSize Get(int id, string lang = "")
+
+        public IEnumerable<ServingSize> Get(int id, string lang = "")
         {
-            servingSize = dbConnection.GetServingSizeById(id, lang);
-            return servingSize;
+            servingSizes = dbConnection.GetServingSizeById(id, lang);
+            return servingSizes;
         }
 
-            public IEnumerable<ServingSize> GetAll(string lang="")
+        public IEnumerable<ServingSize> GetAll(string lang="")
         {
                 servingSizes = dbConnection.GetAllServingSize(lang);
 

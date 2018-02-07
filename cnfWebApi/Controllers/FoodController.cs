@@ -5,7 +5,7 @@ using System.Web.Http;
 
 namespace cnfWebApi.Controllers
 {
-    public class WFoodController : ApiController
+    public class FoodController : ApiController
     {
         static readonly IFoodRepository databasePlaceholder = new FoodRepository();
 
@@ -15,16 +15,15 @@ namespace cnfWebApi.Controllers
             return databasePlaceholder.GetAll(lang);
         }
         
-        public Food GetFoodById(int id, string lang = "")
+        public IEnumerable<Food> GetFoodById(int id, string lang = "")
         {
-            Food food = databasePlaceholder.Get(id, lang);
-            if (food == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            return food;
-            
-
+            return databasePlaceholder.Get(id, lang);
+            // Food food = databasePlaceholder.Get(id, lang);
+            // if (food == null)
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.NotFound);
+            //}
+            //return food;
         }
     }
 }

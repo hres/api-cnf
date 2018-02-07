@@ -6,6 +6,6 @@ namespace cnfWebApi.Models
     {
         IEnumerable<ServingSize> GetAll(string lang="");
 
-        ServingSize Get(int id, string lang = "");
+        IEnumerable<ServingSize> Get(int id, string lang = "");
     }
 }

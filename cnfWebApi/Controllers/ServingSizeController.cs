@@ -15,16 +15,15 @@ namespace cnfWebApi.Controllers
             return databasePlaceholder.GetAll(lang);
         }
         
-        public ServingSize GetServingSizeById(int id, string lang = "")
+        public IEnumerable<ServingSize> GetServingSizeById(int id, string lang = "")
         {
-            ServingSize servingSize = databasePlaceholder.Get(id, lang);
-            if (servingSize == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            return servingSize;
-            
-
+            return databasePlaceholder.Get(id, lang);
+            //ServingSize servingSize = databasePlaceholder.Get(id, lang);
+            //if (servingSize == null)
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.NotFound);
+            //}
+            //return servingSize;
         }
     }
 }

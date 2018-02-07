@@ -34,15 +34,69 @@ namespace cnfWebApi.Controllers
 
             switch (dataType)
             {
-                case "foodGroup":
-                    var foodGroup = dbConnection.GetAllFoodGroup(lang).ToList();
-                    if (foodGroup.Count > 0)
+                case "food":
+                    var food = dbConnection.GetAllFood(lang).ToList();
+                    if (food.Count > 0)
                     {
-                        json = JsonConvert.SerializeObject(foodGroup);
-
+                        json = JsonConvert.SerializeObject(food);
                     }
                     break;
-
+                case "nutrientamount":
+                    var nutrientamount = dbConnection.GetAllNutrientAmount(lang).ToList();
+                    if (nutrientamount.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(nutrientamount);
+                    }
+                    break;
+                case "nutrientgroup":
+                    var nutrientgroup = dbConnection.GetAllNutrientGroup(lang).ToList();
+                    if (nutrientgroup.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(nutrientgroup);
+                    }
+                    break;
+                case "nutrientname":
+                    var nutrientname = dbConnection.GetAllNutrientName(lang).ToList();
+                    if (nutrientname.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(nutrientname);
+                    }
+                    break;
+                case "nutrientsource":
+                    var nutrientsource = dbConnection.GetAllNutrientSource(lang).ToList();
+                    if (nutrientsource.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(nutrientsource);
+                    }
+                    break;
+                case "refuseamount":
+                    var refuseamount = dbConnection.GetAllRefuseAmount(lang).ToList();
+                    if (refuseamount.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(refuseamount);
+                    }
+                    break;
+                case "servingsize":
+                    var servingsize = dbConnection.GetAllServingSize(lang).ToList();
+                    if (servingsize.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(servingsize);
+                    }
+                    break;
+                case "yieldamount":
+                    var yieldamount = dbConnection.GetAllYieldAmount(lang).ToList();
+                    if (yieldamount.Count > 0)
+                    {
+                        json = JsonConvert.SerializeObject(yieldamount);
+                    }
+                    break;
+                    //case "foodGroup":
+                    //    var foodGroup = dbConnection.GetAllFoodGroup(lang).ToList();
+                    //    if (foodGroup.Count > 0)
+                    //    {
+                    //        json = JsonConvert.SerializeObject(foodGroup);
+                    //    }
+                    //    break;
             }
 
             if (!string.IsNullOrWhiteSpace(json))

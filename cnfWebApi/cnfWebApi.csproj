@@ -213,10 +213,19 @@
     <Compile Include="Controllers\NutrientSourceController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\NutrientAmountController.cs" />
+    <Compile Include="Controllers\YieldAmountController.cs" />
+    <Compile Include="Controllers\RefuseAmountController.cs" />
     <Compile Include="Controllers\ServingSizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IYieldAmountRepository.cs" />
+    <Compile Include="Models\IRefuseAmountRepository.cs" />
+    <Compile Include="Models\YieldAmountRepository.cs" />
+    <Compile Include="Models\YieldAmount.cs" />
+    <Compile Include="Models\RefuseGroup.cs" />
+    <Compile Include="Models\RefuseAmountRepository.cs" />
+    <Compile Include="Models\RefuseAmount.cs" />
     <Compile Include="Models\FoodGroupRepository.cs" />
     <Compile Include="Models\boolean.cs" />
     <Compile Include="Models\DataEntity.cs" />
@@ -229,7 +238,6 @@
     <Compile Include="Models\INutrientAmountRepository.cs" />
     <Compile Include="Models\IServingSizeRepository.cs" />
     <Compile Include="Models\NutrientGroup.cs" />
-    <Compile Include="Models\NutrientGroupController.cs" />
     <Compile Include="Models\NutrientGroupRepository.cs" />
     <Compile Include="Models\NutrientName.cs" />
     <Compile Include="Models\NutrientNameRepository.cs" />
@@ -282,6 +290,9 @@
     <Content Include="bin\WebActivatorEx.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebTemplateCore.dll" />
+    <Content Include="cnf-dataset-en.html" />
+    <Content Include="cnf-dataset-fr.html" />
+    <Content Include="index-en.html" />
     <Content Include="Views\Shared\genericError.html" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -343,7 +354,9 @@
     <Content Include="Controllers\dhprController.ashx" />
     <None Include="Properties\PublishProfiles\cnf.pubxml" />
     <None Include="Properties\PublishProfiles\cnfapi.pubxml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

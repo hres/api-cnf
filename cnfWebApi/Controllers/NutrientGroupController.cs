@@ -15,16 +15,15 @@ namespace cnfWebApi.Controllers
             return databasePlaceholder.GetAll(lang);
         }
         
-        public NutrientGroup GetNutrientGroupById(int id, string lang = "")
+        public IEnumerable<NutrientGroup> GetNutrientGroupById(int id, string lang = "")
         {
-            NutrientGroup nutrientGroup = databasePlaceholder.Get(id, lang);
-            if (nutrientGroup == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            return nutrientGroup;
-            
-
+            return databasePlaceholder.Get(id, lang);
+            //NutrientGroup nutrientGroup = databasePlaceholder.Get(id, lang);
+            //if (nutrientGroup == null)
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.NotFound);
+            //}
+            //return nutrientGroup;
         }
     }
 }

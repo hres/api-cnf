@@ -1,7 +1,7 @@
 using System;
 namespace cnfWebApi.Models
 {
-    public class ServingSize
+    public class RefuseAmount
     {
         public double conv_factor { get; set; }
         public int food_c { get; set; }

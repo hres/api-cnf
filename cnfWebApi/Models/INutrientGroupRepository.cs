@@ -10,6 +10,6 @@ namespace cnfWebApi.Models
     {
         IEnumerable<NutrientGroup> GetAll(string lang="");
 
-        NutrientGroup Get(int id, string lang = "");
+        IEnumerable<NutrientGroup> Get(int id, string lang = "");
     }
 }
