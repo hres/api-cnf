@@ -1,4 +1,4 @@
-﻿namespace DpdWebApi.Models
+﻿namespace cnfWebApi.Models
 {
     public class boolean
     {
