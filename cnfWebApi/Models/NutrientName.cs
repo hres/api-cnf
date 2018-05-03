@@ -3,18 +3,15 @@ namespace cnfWebApi.Models
 {
     public class NutrientName
     {
-        public int nutr_c { get; set; }
-        public string nutr_symbol { get; set; }
-        public string nutr_name { get; set; }
+        public int nutrient_name_id { get; set; }
+        public string nutrient_symbol { get; set; }
+        public string nutrient_name { get; set; }
         public string unit { get; set; }
-        public int sequence_c { get; set; }
-        public int nutr_code { get; set; }
-        public int nutr_web { get; set; }
+        public int nutrient_code { get; set; }
         public string tagname { get; set; }
-        public int nutr_active_flag { get; set; }
-        public int nutr_decimal_place { get; set; }
-        public int nutr_web_order { get; set; }
-        public string nutr_web_name { get; set; }
+        public int nutrient_decimals { get; set; }
+        public int nutrient_web_order { get; set; }
+        public string nutrient_web_name { get; set; }
         public int nutrient_group_id { get; set; }
     }
 }

@@ -9,13 +9,13 @@ namespace cnfWebApi.Controllers
     {
         static readonly INutrientGroupRepository databasePlaceholder = new NutrientGroupRepository();
 
-        public IEnumerable<NutrientGroup> GetAllNutrientGroup(string lang="")
+        public IEnumerable<NutrientGroup> GetAllNutrientGroup(string lang="en")
         {
 
             return databasePlaceholder.GetAll(lang);
         }
         
-        public IEnumerable<NutrientGroup> GetNutrientGroupById(int id, string lang = "")
+        public IEnumerable<NutrientGroup> GetNutrientGroupById(int id, string lang = "en")
         {
             return databasePlaceholder.Get(id, lang);
             //NutrientGroup nutrientGroup = databasePlaceholder.Get(id, lang);

@@ -9,12 +9,12 @@ namespace cnfWebApi.Controllers
     {
         static readonly INutrientAmountRepository databasePlaceholder = new NutrientAmountRepository();
 
-        public IEnumerable<NutrientAmount> GetAllNutrientAmount(string lang="")
+        public IEnumerable<NutrientAmount> GetAllNutrientAmount(string lang="en")
         {
             return databasePlaceholder.GetAll(lang);
         }
         
-        public IEnumerable<NutrientAmount> GetNutrientAmountById(int id, string lang = "")
+        public IEnumerable<NutrientAmount> GetNutrientAmountById(int id, string lang = "en")
         {
             return databasePlaceholder.Get(id, lang);
             //NutrientAmount nutrientAmount = databasePlaceholder.Get(id, lang);

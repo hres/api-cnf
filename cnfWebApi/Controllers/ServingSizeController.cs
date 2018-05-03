@@ -9,13 +9,13 @@ namespace cnfWebApi.Controllers
     {
         static readonly IServingSizeRepository databasePlaceholder = new ServingSizeRepository();
 
-        public IEnumerable<ServingSize> GetAllServingSize(string lang="")
+        public IEnumerable<ServingSize> GetAllServingSize(string lang="en")
         {
 
             return databasePlaceholder.GetAll(lang);
         }
         
-        public IEnumerable<ServingSize> GetServingSizeById(int id, string lang = "")
+        public IEnumerable<ServingSize> GetServingSizeById(int id, string lang = "en")
         {
             return databasePlaceholder.Get(id, lang);
             //ServingSize servingSize = databasePlaceholder.Get(id, lang);

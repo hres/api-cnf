@@ -287,13 +287,6 @@
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./food/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>Aliment</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=food&lang=fr" title="Resource 1">Accès</a></td>
-                                    </tr>
                                     <!--Nutrient Amount-->
                                     <tr>
                                         <td>Teneur en élément nutritif</td>
@@ -308,13 +301,6 @@
                                         <td>XML</td>
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./nutrientamount/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Teneur en élément nutritif</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=nutrientamount&lang=fr" title="Resource 1">Accès</a></td>
                                     </tr>
                                     <!--Nutrient Group-->
                                     <tr>
@@ -331,13 +317,6 @@
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./nutrientgroup/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>Groupe d'éléments nutritifs</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=nutrientgroup&lang=fr" title="Resource 1">Accès</a></td>
-                                    </tr>
                                     <!--Nutrient Name-->
                                     <tr>
                                         <td>Nom des éléments nutritifs</td>
@@ -352,13 +331,6 @@
                                         <td>XML</td>
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./nutrientname/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nom des éléments nutritifs</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=nutrientname&lang=fr" title="Resource 1">Accès</a></td>
                                     </tr>
                                     <!--Nutrient Source-->
                                     <tr>
@@ -375,13 +347,6 @@
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./nutrientsource/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>Source d'éléments nutritifs</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=nutrientsource&lang=fr" title="Resource 1">Accès</a></td>
-                                    </tr>
                                     <!--Refuse Amount-->
                                     <tr>
                                         <td>Portion non comestible</td>
@@ -396,13 +361,6 @@
                                         <td>XML</td>
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./refuseamount/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Portion non comestible</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=refuseamount&lang=fr" title="Resource 1">Accès</a></td>
                                     </tr>
                                     <!--Serving Size-->
                                     <tr>
@@ -419,13 +377,6 @@
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./servingsize/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>Portion comestible</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=servingsize&lang=fr" title="Resource 1">Accès</a></td>
-                                    </tr>
                                     <!--Yield-->
                                     <tr>
                                         <td>Rendement</td>
@@ -440,13 +391,6 @@
                                         <td>XML</td>
                                         <td>Français</td>
                                         <td><a class="resource-url-analytics btn btn-primary" href="./yieldamount/?lang=fr&type=xml" target="_blank" title="Resource 1">Accès</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rendement</td>
-                                        <td>Dataset</td>
-                                        <td>CSV</td>
-                                        <td>Français</td>
-                                        <td><a class="resource-url-analytics btn btn-primary" href="./CSV/DownloadCSV?dataType=yieldamount&lang=fr" title="Resource 1">Accès</a></td>
                                     </tr>
                                     <!--CNF Documentation page-->
                                     <tr>
@@ -482,7 +426,7 @@
                         var defPreFooter = document.getElementById("def-preFooter");
                         defPreFooter.outerHTML = wet.builder.preFooter({
                             cdnEnv: "prod",
-                            dateModified: "2018-04-24",
+                            dateModified: "2018-05-03",
                             showPostContent: true,
                             showShare: true,
                         });
