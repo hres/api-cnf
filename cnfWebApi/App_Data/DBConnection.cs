@@ -1,4 +1,4 @@
-﻿using cnf;
+﻿
 using cnfWebApi.Models;
 using Oracle.ManagedDataAccess.Client;
 using System;
@@ -41,10 +41,11 @@ namespace cnf
         public List<Food> GetFoodById(int id, string lang = "")
         {
             var items = new List<Food>();
-            string commandText = "SELECT * FROM CNFWEBADM.WEB_FOOD_SEARCH WHERE FOOD_C =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.WEB_FOOD_SEARCH WHERE FOOD_C = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -56,15 +57,15 @@ namespace cnf
                             {
                                 var item = new Food();
 
-                                item.food_c = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                item.food_code = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
                                
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
                                 }                            
 
                                 items.Add(item);
@@ -105,14 +106,14 @@ namespace cnf
                             {
                                 var item = new Food();
 
-                                item.food_c = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                item.food_code = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -138,10 +139,13 @@ namespace cnf
         public List<NutrientAmount> GetNutrientAmountById(int id, string lang = "")
         {
             var items = new List<NutrientAmount>();
-            string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, UNIT, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, SOURCE_C, NRD_REF, SOURCE_DESC, SOURCE_DESC_F FROM CNFWEBADM.WEB_NUTRIENT_LIST WHERE FOOD_C =" + id;
+            // 20180503 Removed to reduce size of data returned. ORIGINAL string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, UNIT, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, SOURCE_C, NRD_REF, SOURCE_DESC, SOURCE_DESC_F FROM CNFWEBADM.WEB_NUTRIENT_LIST WHERE FOOD_C = :id ";
+            // Modified version with items removed. ORIGINAL is above.
+            string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, SOURCE_C FROM CNFWEBADM.WEB_NUTRIENT_LIST WHERE FOOD_C = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -153,27 +157,27 @@ namespace cnf
                             {
                                 var item = new NutrientAmount();
 
-                                item.food_c = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.nutr_value = dr["NUTR_VALUE"] == DBNull.Value ? 0 : Convert.ToDouble(dr["NUTR_VALUE"]);
-                                item.std_error = dr["STD_ERROR"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STD_ERROR"]);
-                                item.num_obser = dr["NUM_OBSER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUM_OBSER"]);
-                                item.nutr_c = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
-                                item.unit = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
-                                item.nutr_decimal_place = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
-                                item.nutr_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
-                                item.source_c = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
-                                item.nrd_ref = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
-                                
+                                item.food_code = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                item.nutrient_value = dr["NUTR_VALUE"] == DBNull.Value ? 0 : Convert.ToDouble(dr["NUTR_VALUE"]);
+                                item.standard_error = dr["STD_ERROR"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STD_ERROR"]);
+                                item.number_observation = dr["NUM_OBSER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUM_OBSER"]);
+                                item.nutrient_name_id = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
+                                // 20180503 Removed to reduce size of data returned. item. unit = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_decimals = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
+                                item.nutrient_source_id = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_source_code = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
+
                                 if (lang.Equals("fr"))
                                 {
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
-                                    item.source_desc   = dr["SOURCE_DESC_F"]   == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
+                                    // 20180503 Removed to reduce size of data returned. item.nutrient_source_description   = dr["SOURCE_DESC_F"]   == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
 
                                 }
                                 else
                                 {
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
-                                    item.source_desc   = dr["SOURCE_DESC"]     == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
+                                    // 20180503 Removed to reduce size of data returned. item.nutrient_source_description   = dr["SOURCE_DESC"]     == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -202,7 +206,7 @@ namespace cnf
             //NOTE: The SQL statement below is currently hardcoded at the end with "FROM CNFWEBADM.WEB_NUTRIENT_LIST WHERE FOOD_C =20" for test purposes.
             //      The results returned are large and cause "OutOfMemoryException: Exception of type 'System.OutOfMemoryException' to be thrown."
             //string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, UNIT, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, SOURCE_C, NRD_REF, SOURCE_DESC, SOURCE_DESC_F FROM CNFWEBADM.WEB_NUTRIENT_LIST WHERE FOOD_C =20";
-            string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, UNIT, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, SOURCE_C, NRD_REF, SOURCE_DESC, SOURCE_DESC_F FROM CNFWEBADM.WEB_NUTRIENT_LIST";
+            string commandText = "SELECT FOOD_C, NUTR_VALUE, STD_ERROR, NUM_OBSER, NUTR_C, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, SOURCE_C FROM CNFWEBADM.WEB_NUTRIENT_LIST";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
@@ -217,27 +221,27 @@ namespace cnf
                             {
                                 var item = new NutrientAmount();
 
-                                item.food_c     = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.nutr_value = dr["NUTR_VALUE"] == DBNull.Value ? 0 : Convert.ToDouble(dr["NUTR_VALUE"]);
-                                item.std_error  = dr["STD_ERROR"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STD_ERROR"]);
-                                item.num_obser  = dr["NUM_OBSER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUM_OBSER"]);
-                                item.nutr_c     = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
-                                item.unit               = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
-                                item.nutr_decimal_place = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
-                                item.nutr_web_order     = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
-                                item.source_c           = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
-                                item.nrd_ref            = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
+                                item.food_code     = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                item.nutrient_value = dr["NUTR_VALUE"] == DBNull.Value ? 0 : Convert.ToDouble(dr["NUTR_VALUE"]);
+                                item.standard_error  = dr["STD_ERROR"] == DBNull.Value ? 0 : Convert.ToInt32(dr["STD_ERROR"]);
+                                item.number_observation  = dr["NUM_OBSER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUM_OBSER"]);
+                                item.nutrient_name_id = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
+                                // 20180503 Removed to reduce size of data returned. item.unit               = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_decimals = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_web_order     = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
+                                item.nutrient_source_id = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
+                                // 20180503 Removed to reduce size of data returned. item.nutrient_source_code            = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
-                                    item.source_desc = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
+                                    // 20180503 Removed to reduce size of data returned. item.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
 
                                 }
                                 else
                                 {
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
-                                    item.source_desc = dr["SOURCE_DESC"] == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
+                                    // 20180503 Removed to reduce size of data returned. item.nutrient_source_description = dr["SOURCE_DESC"] == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -263,10 +267,11 @@ namespace cnf
         public List<NutrientGroup> GetNutrientGroupById(int id, string lang = "")
         {
             var items = new List<NutrientGroup>();
-            string commandText = "SELECT * FROM CNFWEBADM.NUTRIENT_GROUP WHERE NUTRIENT_GROUP_ID =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.NUTRIENT_GROUP WHERE NUTRIENT_GROUP_ID = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -365,11 +370,12 @@ namespace cnf
         {
             var nutrientname = new NutrientName();
 
-            string commandText = "SELECT NUTR_C, NUTR_SYMBOL, UNIT, NUTR_NAME, NUTR_NAME_F, TAGNAME, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, NUTRIENT_GROUP_ID  FROM CNFWEBADM.NUTR_NAME WHERE NUTR_C =" + id;
+            string commandText = "SELECT NUTR_C, NUTR_CODE, NUTR_SYMBOL, UNIT, NUTR_NAME, NUTR_NAME_F, TAGNAME, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, NUTRIENT_GROUP_ID  FROM CNFWEBADM.NUTR_NAME WHERE NUTR_C = :id ";
 
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -379,23 +385,24 @@ namespace cnf
                         {
                             while (dr.Read())
                             {
-                                nutrientname.nutr_c = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
-                                nutrientname.nutr_symbol = dr["NUTR_SYMBOL"] == DBNull.Value ? string.Empty : dr["NUTR_SYMBOL"].ToString().Trim();
+                                nutrientname.nutrient_name_id = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
+                                nutrientname.nutrient_code = dr["NUTR_CODE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_CODE"]);
+                                nutrientname.nutrient_symbol = dr["NUTR_SYMBOL"] == DBNull.Value ? string.Empty : dr["NUTR_SYMBOL"].ToString().Trim();
                                 nutrientname.unit = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
                                 nutrientname.tagname = dr["TAGNAME"] == DBNull.Value ? string.Empty : dr["TAGNAME"].ToString().Trim();
-                                nutrientname.nutr_decimal_place = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
-                                nutrientname.nutr_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
+                                nutrientname.nutrient_decimals = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
+                                nutrientname.nutrient_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
                                 nutrientname.nutrient_group_id = dr["NUTRIENT_GROUP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
 
                                 if (lang.Equals("fr"))
                                 {
-                                    nutrientname.nutr_name    = dr["NUTR_NAME_F"] == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
-                                    nutrientname.nutr_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
+                                    nutrientname.nutrient_name    = dr["NUTR_NAME_F"] == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
+                                    nutrientname.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    nutrientname.nutr_name     = dr["NUTR_NAME"] == DBNull.Value ? string.Empty : dr["NUTR_NAME"].ToString().Trim();
-                                    nutrientname.nutr_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();                                  
+                                    nutrientname.nutrient_name     = dr["NUTR_NAME"] == DBNull.Value ? string.Empty : dr["NUTR_NAME"].ToString().Trim();
+                                    nutrientname.nutrient_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();                                  
                                 }
                             }
                         }
@@ -420,7 +427,7 @@ namespace cnf
         {
             var items = new List<NutrientName>();
 
-            string commandText = "SELECT NUTR_C, NUTR_SYMBOL, UNIT, NUTR_NAME, NUTR_NAME_F, TAGNAME, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, NUTRIENT_GROUP_ID  FROM CNFWEBADM.NUTR_NAME";
+            string commandText = "SELECT NUTR_C, NUTR_CODE, NUTR_SYMBOL, UNIT, NUTR_NAME, NUTR_NAME_F, TAGNAME, NUTR_DECIMAL_PLACE, NUTR_WEB_ORDER, NUTR_WEB_NAME_E, NUTR_WEB_NAME_F, NUTRIENT_GROUP_ID  FROM CNFWEBADM.NUTR_NAME";
 
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
@@ -436,23 +443,24 @@ namespace cnf
                             {
                                 var item = new NutrientName();
 
-                                item.nutr_c = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
-                                item.nutr_symbol = dr["NUTR_SYMBOL"] == DBNull.Value ? string.Empty : dr["NUTR_SYMBOL"].ToString().Trim();
+                                item.nutrient_name_id = dr["NUTR_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_C"]);
+                                item.nutrient_code = dr["NUTR_CODE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_CODE"]);
+                                item.nutrient_symbol = dr["NUTR_SYMBOL"] == DBNull.Value ? string.Empty : dr["NUTR_SYMBOL"].ToString().Trim();
                                 item.unit = dr["UNIT"] == DBNull.Value ? string.Empty : dr["UNIT"].ToString().Trim();
                                 item.tagname = dr["TAGNAME"] == DBNull.Value ? string.Empty : dr["TAGNAME"].ToString().Trim();
-                                item.nutr_decimal_place = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
-                                item.nutr_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
+                                item.nutrient_decimals = dr["NUTR_DECIMAL_PLACE"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_DECIMAL_PLACE"]);
+                                item.nutrient_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
                                 item.nutrient_group_id = dr["NUTRIENT_GROUP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.nutr_name     = dr["NUTR_NAME_F"]    == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
+                                    item.nutrient_name     = dr["NUTR_NAME_F"]    == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.nutr_name    = dr["NUTR_NAME"]       == DBNull.Value ? string.Empty : dr["NUTR_NAME"].ToString().Trim();
-                                    item.nutr_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
+                                    item.nutrient_name    = dr["NUTR_NAME"]       == DBNull.Value ? string.Empty : dr["NUTR_NAME"].ToString().Trim();
+                                    item.nutrient_web_name = dr["NUTR_WEB_NAME_E"] == DBNull.Value ? string.Empty : dr["NUTR_WEB_NAME_E"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -479,11 +487,12 @@ namespace cnf
         {
             var nutrientsource = new NutrientSource();
 
-            string commandText = "SELECT * FROM CNFWEBADM.NUTR_SOURCE WHERE NUTR_SOURCE_C =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.NUTR_SOURCE WHERE NUTR_SOURCE_C = :id ";
 
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -493,16 +502,16 @@ namespace cnf
                         {
                             while (dr.Read())
                             {
-                                nutrientsource.nutr_source_c = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);                          
-                                nutrientsource.nrd_ref       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
+                                nutrientsource.nutrient_source_id = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);                          
+                                nutrientsource.nutrient_source_code       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
                                 if (lang.Equals("fr"))
                                 {
-                                    nutrientsource.source_desc = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
+                                    nutrientsource.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    nutrientsource.source_desc = dr["SOURCE_DESC"]   == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
+                                    nutrientsource.nutrient_source_description = dr["SOURCE_DESC"]   == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
                                 }
                             }
                         }
@@ -542,16 +551,16 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new NutrientSource();
-                                item.nutr_source_c = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);
-                                item.nrd_ref       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
+                                item.nutrient_source_id = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);
+                                item.nutrient_source_code       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.source_desc = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
+                                    item.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.source_desc = dr["SOURCE_DESC"] == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
+                                    item.nutrient_source_description = dr["SOURCE_DESC"] == DBNull.Value ? string.Empty : dr["SOURCE_DESC"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -577,10 +586,11 @@ namespace cnf
         public List<RefuseAmount> GetRefuseAmountById(int id, string lang = "")
         {
             var items = new List<RefuseAmount>();
-            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='R' AND FOOD_C =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='R' AND FOOD_C = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -591,19 +601,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new RefuseAmount();
-                                item.conv_factor    = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c         = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.refuse_amount = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code         = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.refuse_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.refuse_name = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
 
                                 items.Add(item);
@@ -642,19 +653,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new RefuseAmount();
-                                item.conv_factor    = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c         = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.refuse_amount  = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code      = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.refuse_name      = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description = dr["FOOD_DESC"] == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.refuse_name      = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
                                 items.Add(item);
                             }
@@ -679,10 +691,11 @@ namespace cnf
         public List<ServingSize> GetServingSizeById(int id, string lang = "")
         {
             var items = new List<ServingSize>();
-            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='U' AND FOOD_C =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='U' AND FOOD_C = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -693,19 +706,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new ServingSize();
-                                item.conv_factor  = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.conversion_factor_value = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.measure_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.measure_name = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
                                 items.Add(item);
                             }
@@ -743,19 +757,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new ServingSize();
-                                item.conv_factor  = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.conversion_factor_value  = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.measure_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.measure_name = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
                                 items.Add(item);
                             }
@@ -780,10 +795,11 @@ namespace cnf
         public List<YieldAmount> GetYieldAmountById(int id, string lang = "")
         {
             var items = new List<YieldAmount>();
-            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='Y' AND FOOD_C =" + id;
+            string commandText = "SELECT * FROM CNFWEBADM.WEB_SERVING_SIZE WHERE MEASURE_TYPE ='Y' AND FOOD_C = :id ";
             using (OracleConnection con = new OracleConnection(cnfDBConnection))
             {
                 OracleCommand cmd = new OracleCommand(commandText, con);
+                cmd.Parameters.Add(":id", id);
                 try
                 {
                     con.Open();
@@ -794,19 +810,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new YieldAmount();
-                                item.conv_factor  = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.yield_amount = dr["CONV_FACTOR"]  == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code       = dr["FOOD_C"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.yield_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.yield_name = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
                                 items.Add(item);
                             }
@@ -843,19 +860,20 @@ namespace cnf
                             while (dr.Read())
                             {
                                 var item = new YieldAmount();
-                                item.conv_factor    = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
-                                item.food_c         = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
+                                item.yield_amount = dr["CONV_FACTOR"]    == DBNull.Value ? 0 : Convert.ToDouble(dr["CONV_FACTOR"]);
+                                item.food_code         = dr["FOOD_C"]         == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
+                                // 20180501 measure_type is not being displayed to reduce data set size.
+                                //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
                                 if (lang.Equals("fr"))
                                 {
-                                    item.food_desc    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
+                                    item.yield_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
                                 }
                                 else
                                 {
-                                    item.food_desc    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
-                                    item.measure_desc = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
+                                    item.food_description    = dr["FOOD_DESC"]    == DBNull.Value ? string.Empty : dr["FOOD_DESC"].ToString().Trim();
+                                    item.yield_name = dr["MEASURE_DESC"] == DBNull.Value ? string.Empty : dr["MEASURE_DESC"].ToString().Trim();
                                 }
                                 items.Add(item);
                             }
@@ -891,13 +909,14 @@ namespace cnf
             //}
             //else
             //{
-            //    commandText += " WHERE A.COMPANY_CODE = C.COMPANY_CODE AND A.DRUG_CODE = " + id; 
+            //    commandText += " WHERE A.COMPANY_CODE = C.COMPANY_CODE AND A.DRUG_CODE = :id ";
             //}           
 
 
             //using (OracleConnection con = new OracleConnection(DpdDBConnection))
             //{
             //    OracleCommand cmd = new OracleCommand(commandText, con);
+            //    cmd.Parameters.Add(":id", id);
             //    try
             //    {
             //        con.Open();

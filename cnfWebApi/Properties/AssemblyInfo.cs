@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DpdWebApi")]
+[assembly: AssemblyTitle("cnfWebApi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HC-SC PHAC-ASPC")]
-[assembly: AssemblyProduct("DpdWebApi")]
+[assembly: AssemblyProduct("cnfWebApi")]
 [assembly: AssemblyCopyright("Copyright © HC-SC PHAC-ASPC 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

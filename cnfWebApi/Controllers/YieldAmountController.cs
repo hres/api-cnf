@@ -9,13 +9,13 @@ namespace cnfWebApi.Controllers
     {
         static readonly IYieldAmountRepository databasePlaceholder = new YieldAmountRepository();
 
-        public IEnumerable<YieldAmount> GetAllYieldAmount(string lang="")
+        public IEnumerable<YieldAmount> GetAllYieldAmount(string lang="en")
         {
 
             return databasePlaceholder.GetAll(lang);
         }
 
-        public IEnumerable<YieldAmount> GetYieldAmountById(int id, string lang = "")
+        public IEnumerable<YieldAmount> GetYieldAmountById(int id, string lang = "en")
         {
             return databasePlaceholder.Get(id, lang);
 

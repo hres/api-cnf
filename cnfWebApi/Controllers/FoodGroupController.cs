@@ -10,13 +10,13 @@ namespace cnfWebApi.Controllers
     {
         static readonly IFoodGroupRepository databasePlaceholder = new FoodGroupRepository();
 
-        public IEnumerable<FoodGroup> GetAllFoodGroup(string lang="")
+        public IEnumerable<FoodGroup> GetAllFoodGroup(string lang="en")
         {
 
             return databasePlaceholder.GetAll(lang);
         }
         
-        public FoodGroup GetFoodGroupById(int id, string lang = "")
+        public FoodGroup GetFoodGroupById(int id, string lang = "en")
         {
             FoodGroup foodGroup = databasePlaceholder.Get(id, lang);
             if (foodGroup == null)

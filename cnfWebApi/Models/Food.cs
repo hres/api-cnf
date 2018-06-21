@@ -3,7 +3,7 @@ namespace cnfWebApi.Models
 {
     public class Food
     {
-        public int food_c{ get; set; }
-        public string food_desc{ get; set; }
+        public int food_code{ get; set; }
+        public string food_description{ get; set; }
     }
 }

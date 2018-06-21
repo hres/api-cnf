@@ -9,13 +9,13 @@ namespace cnfWebApi.Controllers
     {
         static readonly IFoodRepository databasePlaceholder = new FoodRepository();
 
-        public IEnumerable<Food> GetAllFood(string lang="")
+        public IEnumerable<Food> GetAllFood(string lang="en")
         {
 
             return databasePlaceholder.GetAll(lang);
         }
         
-        public IEnumerable<Food> GetFoodById(int id, string lang = "")
+        public IEnumerable<Food> GetFoodById(int id, string lang = "en")
         {
             return databasePlaceholder.Get(id, lang);
             // Food food = databasePlaceholder.Get(id, lang);
