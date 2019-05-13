@@ -24,8 +24,7 @@ namespace cnf
         {
             try
             {
-                var filePath = ConfigurationManager.AppSettings["logFileLocation"].ToString();
-                var logFile = string.Format("{0}{1:yyyyMMdd}.txt", filePath, DateTime.Now);
+                var logFile = string.Format("{0}{1:yyyyMMdd}.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), DateTime.Now);
 
                 if (!File.Exists(logFile)) //No File? Create
                 {
