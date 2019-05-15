@@ -25,7 +25,7 @@ namespace cnf
         // Log an Exception
         public static void LogException(Exception exc, string source)
         {
-            logger.Info(exc, source);
+            logger.Error(exc, source);
             //try
             //{
             //    var logFile = string.Format("{0}{1:yyyyMMdd}.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), DateTime.Now);
