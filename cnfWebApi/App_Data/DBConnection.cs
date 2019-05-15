@@ -77,6 +77,7 @@ namespace cnf
                 {
                     string errorMessages = string.Format("DbConnection.cs - GetFoodById()");
                     ExceptionHelper.LogException(ex, errorMessages);
+                    
                 }
                 finally
                 {

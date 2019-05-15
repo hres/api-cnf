@@ -1,0 +1,5 @@
+2019-05-15 11:07:02.8934|ERROR|cnf.ExceptionHelper|DbConnection.cs - GetAllFood()
+2019-05-15 11:09:31.8613|ERROR|cnf.ExceptionHelper|DbConnection.cs - GetAllFood()
+2019-05-15 11:31:16.3647|ERROR|cnf.ExceptionHelper|DbConnection.cs - GetAllFood()
+2019-05-15 11:31:18.5580|ERROR|cnf.ExceptionHelper|DbConnection.cs - GetAllFood()
+2019-05-15 11:32:44.8325|ERROR|cnf.ExceptionHelper|DbConnection.cs - GetAllFood()
