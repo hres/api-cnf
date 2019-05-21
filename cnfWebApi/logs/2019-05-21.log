@@ -1,0 +1,3 @@
+2019-05-21 09:27:49.8250 - ERROR: DbConnection.cs - GetAllFood()
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at cnf.DBConnection.GetAllFood(String lang, String refusename) in C:\dev\api-cnf\cnfWebApi\App_Data\DBConnection.cs:line 111
