@@ -59,7 +59,7 @@ namespace cnf
 
                                 item.food_code = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
                                
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                 }
@@ -77,6 +77,7 @@ namespace cnf
                 {
                     string errorMessages = string.Format("DbConnection.cs - GetFoodById()");
                     ExceptionHelper.LogException(ex, errorMessages);
+                    
                 }
                 finally
                 {
@@ -107,7 +108,7 @@ namespace cnf
                                 var item = new Food();
 
                                 item.food_code = dr["FOOD_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["FOOD_C"]);
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                 }
@@ -168,7 +169,7 @@ namespace cnf
                                 item.nutrient_source_id = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
                                 // 20180503 Removed to reduce size of data returned. item.nutrient_source_code = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
                                     // 20180503 Removed to reduce size of data returned. item.nutrient_source_description   = dr["SOURCE_DESC_F"]   == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
@@ -232,7 +233,7 @@ namespace cnf
                                 item.nutrient_source_id = dr["SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SOURCE_C"]);
                                 // 20180503 Removed to reduce size of data returned. item.nutrient_source_code            = dr["NRD_REF"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
                                     // 20180503 Removed to reduce size of data returned. item.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
@@ -286,7 +287,7 @@ namespace cnf
                                 item.nutrient_group_id     = dr["NUTRIENT_GROUP_ID"]     == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
                                 item.nutrient_group_order  = dr["NUTRIENT_GROUP_ORDER"]  == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ORDER"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_group_name = dr["NUTRIENT_GROUP_NAME_F"] == DBNull.Value ? dr["NUTRIENT_GROUP_NAME_E"].ToString().Trim() : dr["NUTRIENT_GROUP_NAME_F"].ToString().Trim();
                                 }
@@ -337,7 +338,7 @@ namespace cnf
                                 item.nutrient_group_id = dr["NUTRIENT_GROUP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
                                 item.nutrient_group_order = dr["NUTRIENT_GROUP_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ORDER"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_group_name = dr["NUTRIENT_GROUP_NAME_F"] == DBNull.Value ? dr["NUTRIENT_GROUP_NAME_E"].ToString().Trim() : dr["NUTRIENT_GROUP_NAME_F"].ToString().Trim();
                                 }
@@ -394,7 +395,7 @@ namespace cnf
                                 nutrientname.nutrient_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
                                 nutrientname.nutrient_group_id = dr["NUTRIENT_GROUP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     nutrientname.nutrient_name    = dr["NUTR_NAME_F"] == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
                                     nutrientname.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
@@ -452,7 +453,7 @@ namespace cnf
                                 item.nutrient_web_order = dr["NUTR_WEB_ORDER"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_WEB_ORDER"]);
                                 item.nutrient_group_id = dr["NUTRIENT_GROUP_ID"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTRIENT_GROUP_ID"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_name     = dr["NUTR_NAME_F"]    == DBNull.Value ? dr["NUTR_NAME"].ToString().Trim() : dr["NUTR_NAME_F"].ToString().Trim();
                                     item.nutrient_web_name = dr["NUTR_WEB_NAME_F"] == DBNull.Value ? dr["NUTR_WEB_NAME_E"].ToString().Trim() : dr["NUTR_WEB_NAME_F"].ToString().Trim();
@@ -505,7 +506,7 @@ namespace cnf
                                 nutrientsource.nutrient_source_id = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);                          
                                 nutrientsource.nutrient_source_code       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     nutrientsource.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
                                 }
@@ -554,7 +555,7 @@ namespace cnf
                                 item.nutrient_source_id = dr["NUTR_SOURCE_C"] == DBNull.Value ? 0 : Convert.ToInt32(dr["NUTR_SOURCE_C"]);
                                 item.nutrient_source_code       = dr["NRD_REF"]       == DBNull.Value ? 0 : Convert.ToInt32(dr["NRD_REF"]);
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.nutrient_source_description = dr["SOURCE_DESC_F"] == DBNull.Value ? dr["SOURCE_DESC"].ToString().Trim() : dr["SOURCE_DESC_F"].ToString().Trim();
                                 }
@@ -606,7 +607,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.refuse_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
@@ -658,7 +659,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description = dr["FOOD_DESC_F"] == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.refuse_name      = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
@@ -711,7 +712,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.measure_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
@@ -762,7 +763,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.measure_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
@@ -815,7 +816,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type = dr["MEASURE_TYPE"] == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.yield_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
@@ -865,7 +866,7 @@ namespace cnf
                                 // 20180501 measure_type is not being displayed to reduce data set size.
                                 //item.measure_type   = dr["MEASURE_TYPE"]   == DBNull.Value ? string.Empty : dr["MEASURE_TYPE"].ToString().Trim();
 
-                                if (lang.Equals("fr"))
+                                if (lang != null && lang.Equals("fr"))
                                 {
                                     item.food_description    = dr["FOOD_DESC_F"]    == DBNull.Value ? dr["FOOD_DESC"].ToString().Trim() : dr["FOOD_DESC_F"].ToString().Trim();
                                     item.yield_name = dr["MEASURE_DESC_F"] == DBNull.Value ? dr["MEASURE_DESC"].ToString().Trim() : dr["MEASURE_DESC_F"].ToString().Trim();
